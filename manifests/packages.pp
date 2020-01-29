@@ -1,4 +1,4 @@
-class pulp_three::install_preqreqs (
+class pulp_three::packages (
   $pulp_plugins,
 ){
 
@@ -40,3 +40,5 @@ class pulp_three::install_preqreqs (
       ensure => present,
     }
   }
+
+}

@@ -31,7 +31,7 @@ class pulp_three (
     class { 'pulp_three::packages':
       pulp_plugins => $pulp_plugins,
     }
-    contain 'pulp_three::install_prereqs'
+    contain 'pulp_three::packages'
   }
 
   if $manage_python {
