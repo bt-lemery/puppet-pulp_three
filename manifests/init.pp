@@ -25,6 +25,7 @@ class pulp_three (
   Boolean $manage_python,
   Array[String] $pulp_plugins,
   Data $proxy,
+  String $python_version,
 ){
 
   if $install_prereqs {
