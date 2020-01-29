@@ -17,11 +17,14 @@
 # @python_version
 #   Python version to install from SCL.  Defaults to 'rh-python36'.
 #
+# @proxy
+#   Proxy to use when installing pip packages/ruby gems.  Defaults to none.
+#
 class pulp_three (
   Boolean $install_prereqs,
   Boolean $manage_python,
   Array[String] $pulp_plugins,
-  Variant[Stdlib::Httpurl,String[0,0]] $http_proxy,
+  Data $proxy,
 ){
 
   if $install_prereqs {
