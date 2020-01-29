@@ -41,6 +41,12 @@
 # @pulp_media_root
 #   Pulp media root.  Defaults to '/var/lib/pulp'.
 #
+# @pulp_working_dir
+#   Pulp working directory.  Defaults to '/var/lib/pulp/tmp'.
+#
+# @pulp_install_dir
+#   Where to install the pulp venv.  Defaults to '/var/lib/pulp/pulpvenv'.
+#
 class pulp_three (
   Boolean $install_prereqs,
   Boolean $manage_python,
@@ -54,6 +60,8 @@ class pulp_three (
   String $pulp_group,
   Integer $pulp_group_gid,
   String $pulp_media_root,
+  String $pulp_working_dir,
+  String $pulp_install_dir,
 ){
 
   if $install_prereqs {
@@ -83,6 +91,22 @@ class pulp_three (
       pulp_group        => $pulp_group,
       pulp_group_gid    => $pulp_group_gid,
     }
+  }
+
+  if ! empty(proxy) {
+    $proxy_server = $proxy
+  } else {
+    $proxy_server = undef
+  }
+
+  class { 'pulp_three::install':
+    pulp_media_root  => $pulp_media_root,
+    pulp_working_dir => $pulp_working_dir,
+    pulp_install_dir => $pulp_install_dir,
+    proxy_server     => $proxy_server,
+    pulp_user        => $pulp_user,
+    pulp_group       => $pulp_group,
+    pulp_plugins     => $pulp_plugins,
   }
 
 }

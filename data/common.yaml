@@ -11,3 +11,5 @@ pulp_three::pulp_user_homedir: ''
 pulp_three::pulp_group: 'pulp'
 pulp_three::pulp_group_gid: 500
 pulp_three::pulp_media_root: '/var/lib/pulp'
+pulp_three::pulp_working_dir: '/var/lib/pulp/tmp'
+pulp_three::pulp_install_dir: '/var/lib/pulp/pulpvenv'
