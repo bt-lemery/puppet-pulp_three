@@ -1,0 +1,5 @@
+---
+pulp_three::install_prereqs: false
+pulp_three::manage_python: false
+pulp_three::pulp_plugins: []
+pulp_three::python_version: 'rh-python36'
