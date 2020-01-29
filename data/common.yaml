@@ -4,3 +4,10 @@ pulp_three::manage_python: false
 pulp_three::pulp_plugins: []
 pulp_three::python_version: 'rh-python36'
 pulp_three::proxy: ''
+pulp_three::manage_user: false
+pulp_three::pulp_user: 'pulp'
+pulp_three::pulp_user_uid: 500
+pulp_three::pulp_user_homedir: ''
+pulp_three::pulp_group: 'pulp'
+pulp_three::pulp_group_gid: 500
+pulp_three::pulp_media_root: '/var/lib/pulp'
