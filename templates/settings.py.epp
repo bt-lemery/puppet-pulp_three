@@ -1,0 +1,21 @@
+<%- |
+  $secret_key,
+  $content_origin_host,
+  $content_origin_protocol,
+  $content_origin_port,
+  $database_engine,
+  $database_host,
+  $database_user,
+  $database_password,
+  $database_name,
+  $redis_host,
+  $redis_port,
+  $redis_password,
+| -%>
+SECRET_KEY = "<%= $secret_key %>"
+CONTENT_ORIGIN = "<%= $content_origin_protocol %>://<%= $content_origin_host %>:<%= $content_origin_port %>"
+DATABASES = {"default": {"ENGINE": "<%= $database_engine %>", "HOST": "<%= $database_host %>", "PASSWORD": "<%= $database_password %>", "NAME": "<%= $database_name %>", "USER": "<%= $database_user %>"}}
+LOGGING_CONFIG = None
+REDIS_HOST = "<%= $redis_host %>"
+REDIS_PORT = "<%= $redis_port %>"
+REDIS_PASSWORD = "<%= $redis_password %>"

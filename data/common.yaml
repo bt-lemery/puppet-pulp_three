@@ -13,3 +13,15 @@ pulp_three::pulp_group_gid: 500
 pulp_three::pulp_media_root: '/var/lib/pulp'
 pulp_three::pulp_working_dir: '/var/lib/pulp/tmp'
 pulp_three::pulp_install_dir: '/var/lib/pulp/pulpvenv'
+pulp_three::secret_key: 'secret'
+pulp_three::content_origin_host: ''
+pulp_three::content_origin_protocol: 'http'
+pulp_three::content_origin_port: 24816
+pulp_three::database_engine: 'django.db.backends.postgresql_psycopg2'
+pulp_three::database_host: 'localhost'
+pulp_three::database_user: 'pulp'
+pulp_three::database_password: 'pulp'
+pulp_three::database_name: 'pulp'
+pulp_three::redis_host: 'localhost'
+pulp_three::redis_port: 6379
+pulp_three::redis_password: 'redis'

@@ -47,6 +47,42 @@
 # @pulp_install_dir
 #   Where to install the pulp venv.  Defaults to '/var/lib/pulp/pulpvenv'.
 #
+# @secret_key
+#   Secret key for Django.  Defaults to 'secret'.
+#
+# @content_origin_host
+#   Content origin hostname for Django.  Defaults to FQDN.
+#
+# @content_origin_protocol
+#   Content origin protocol for Django.  Defaults to 'http'.
+#
+# @content_origin_port
+#   Content origin port for Django.  Defaults to 24816.
+#
+# @database_engine
+#   Database engine string for Django.  Defaults to 'django.db.backends.postgresql_psycopg2'.
+#
+# @database_host
+#   Database host for Django.  Defaults to 'localhost'.
+#
+# @database_user
+#   Database user for Django.  Defaults to 'pulp'.
+#
+# @database_password
+#   Database password for Django.  Defaults to 'pulp'.
+#
+# @database_name
+#   Database name for Django.  Defaults to 'pulp'.
+#
+# @redis_host
+#   Redis host for Pulp workers.  Defaults to 'localhost'.
+#
+# @redis_port
+#   Redis port for Pulp workers.  Defaults to 6379.
+#
+# @redis_password
+#   Redis password for Pulp workers.  Defaults to 'redis'.
+#
 class pulp_three (
   Boolean $install_prereqs,
   Boolean $manage_python,
@@ -62,6 +98,17 @@ class pulp_three (
   String $pulp_media_root,
   String $pulp_working_dir,
   String $pulp_install_dir,
+  String $secret_key,
+  String $content_origin_host,
+  String $content_origin_protocol,
+  Integer $content_origin_port,
+  String $database_engine,
+  String $database_user,
+  String $database_password,
+  String $database_name,
+  String $redis_host,
+  Integer $redis_port,
+  String $redis_password,
 ){
 
   if $install_prereqs {
@@ -107,6 +154,28 @@ class pulp_three (
     pulp_user        => $pulp_user,
     pulp_group       => $pulp_group,
     pulp_plugins     => $pulp_plugins,
+  }
+
+  if empty($content_origin_host) {
+    $content_origin_host_final = $::fqdn
+  } else {
+    $content_origin_host_final = $content_origin_host
+  }
+
+  class { 'pulp_three::config':
+    pulp_group              => $pulp_group,
+    secret_key              => $secret_key,
+    content_origin_host     => $content_origin_host_final,
+    content_origin_protocol => $content_origin_protocol,
+    content_origin_port     => $content_origin_port,
+    database_engine         => $database_engine,
+    database_host           => $database_host,
+    database_user           => $database_user,
+    database_password       => $database_password,
+    database_name           => $database_name,
+    redis_host              => $redis_host,
+    redis_port              => $redis_port,
+    redis_password          => $redis_password,
   }
 
 }
