@@ -28,16 +28,10 @@ class pulp_three::nginx (
 
   nginx::resource::upstream { 'pulp':
     ensure  => present,
-    members => {
-      "${pulp_content_bind_address}:${pulp_content_bind_port}" => {
-        server => $pulp_content_bind_address,
-        port   => Integer($pulp_content_bind_port),
-      },
-      "${pulp_api_bind_address}:${pulp_api_bind_port}"         => {
-        server => $pulp_api_bind_address,
-        port   => Integer($pulp_api_bind_port),
-      },
-    },
+    members => [
+      "${pulp_content_bind_address}:${pulp_content_bind_port}",
+      "${pulp_api_bind_address}:${pulp_api_bind_port}",
+    ],
   }
 
   nginx::resource::location { '/pulp/content/':
