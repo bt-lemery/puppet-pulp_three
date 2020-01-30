@@ -16,7 +16,6 @@ class pulp_three::nginx (
     types_hash_max_size => '4096',
     proxy_redirect      => 'off',
     accept_mutex        => 'off',
-    daemon_group        => 'nginx',
   }
   contain 'nginx'
 
