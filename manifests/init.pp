@@ -83,10 +83,6 @@
 # @redis_password
 #   Redis password for Pulp workers.  Defaults to 'redis'.
 #
-# @manage_database
-#   Whether this module should create a postgres database for pulp to use.  Defaults to false.
-#
-class pulp_three (
   Boolean $install_prereqs,
   Boolean $manage_python,
   Boolean $manage_user,
@@ -113,7 +109,6 @@ class pulp_three (
   String $redis_host,
   Integer $redis_port,
   String $redis_password,
-  Boolean $manage_database,
 ){
 
   if $install_prereqs {
@@ -182,16 +177,6 @@ class pulp_three (
     redis_host              => $redis_host,
     redis_port              => $redis_port,
     redis_password          => $redis_password,
-  }
-
-  if $manage_database {
-    class { 'pulp_three::database':
-      database_host     => $database_host,
-      database_user     => $database_user,
-      database_password => $database_password,
-      database_name     => $database_name,
-    }
-    contain 'pulp_three::database'
   }
 
 }

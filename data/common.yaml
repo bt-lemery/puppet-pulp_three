@@ -25,4 +25,3 @@ pulp_three::database_name: 'pulp'
 pulp_three::redis_host: 'localhost'
 pulp_three::redis_port: 6379
 pulp_three::redis_password: 'redis'
-pulp_three::manage_database: false
