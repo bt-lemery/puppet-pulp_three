@@ -249,4 +249,11 @@ class pulp_three (
   }
   contain 'pulp_three::service'
 
+  class { 'pulp_three::gems':
+    pulp_plugins        => $pulp_plugins,
+    pulp_admin_password => $pulp_admin_password,
+    proxy_server        => $proxy_server,
+  }
+  contain 'pulp_three::gems'
+
 }

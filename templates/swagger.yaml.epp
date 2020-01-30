@@ -1,0 +1,7 @@
+<%- |
+  Data $pulp_admin_password
+| -%>
+---
+username: 'admin'
+password: '<%= $pulp_admin_password %>'
+scheme: 'http'
