@@ -104,6 +104,9 @@
 #  @pulp_settings_file
 #    File location for Pulp config.  Defaults to '/etc/pulp/settings.py'.
 #
+#  @pulp_admin_password
+#    Password for Django admin account.  Defaults to 'admin'.
+#
 class pulp_three (
   Boolean $install_prereqs,
   Boolean $manage_python,
@@ -138,6 +141,7 @@ class pulp_three (
   String $pulp_api_bind_address,
   Integer $pulp_api_bind_port,
   String $pulp_settings_file,
+  String $pulp_admin_password,
 ){
 
   if $install_prereqs {
@@ -220,5 +224,12 @@ class pulp_three (
     }
     contain 'pulp_three::nginx'
   }
+
+  class { 'pulp_three::migrations':
+    pulp_settings_file  => $pulp_settings_file,
+    pulp_install_dir    => $pulp_install_dir,
+    pulp_admin_password => $pulp_admin_password,
+  }
+  contain 'pulp_three::migrations'
 
 }
