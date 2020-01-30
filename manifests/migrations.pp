@@ -15,8 +15,8 @@ class pulp_three::migrations (
     user        => 'pulp',
     group       => 'pulp',
     logoutput   => true,
-    unless      => "/usr/bin/test -f ${pulp_install_dir}/initial_setup_complete",
-    before      => File["${pulp_install_dir}/inital_setup_complete"],
+    creates     => ""${pulp_install_dir}/initial_setup_complete",
+    before      => File["${pulp_install_dir}/initial_setup_complete"],
   }
 
   exec { 'reset_admin_pass':
@@ -29,8 +29,8 @@ class pulp_three::migrations (
     user        => 'pulp',
     group       => 'pulp',
     logoutput   => true,
-    unless      => "/usr/bin/test -f ${pulp_install_dir}/initial_setup_complete",
-    before      => File["${pulp_install_dir}/inital_setup_complete"],
+    creates     => ""${pulp_install_dir}/initial_setup_complete",
+    before      => File["${pulp_install_dir}/initial_setup_complete"],
   }
 
   exec { 'collect_static_media':
@@ -43,11 +43,11 @@ class pulp_three::migrations (
     user        => 'pulp',
     group       => 'pulp',
     logoutput   => true,
-    unless      => "/usr/bin/test -f ${pulp_install_dir}/initial_setup_complete",
-    before      => File["${pulp_install_dir}/inital_setup_complete"],
+    creates     => ""${pulp_install_dir}/initial_setup_complete",
+    before      => File["${pulp_install_dir}/initial_setup_complete"],
   }
 
-  file { "${pulp_install_dir}/inital_setup_complete":
+  file { "${pulp_install_dir}/initial_setup_complete":
     ensure => present,
     owner  => 'root',
     group  => 'root',
