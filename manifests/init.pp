@@ -99,7 +99,7 @@
 #    Address of pulp api service.  Defaults to '127.0.0.1'
 #
 #  @pulp_api_bind_port
-#    Port of pulp api service.  Defaults to 24816.
+#    Port of pulp api service.  Defaults to 24817.
 #
 #  @pulp_settings_file
 #    File location for Pulp config.  Defaults to '/etc/pulp/settings.py'.

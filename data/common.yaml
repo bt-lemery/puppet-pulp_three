@@ -30,7 +30,7 @@ pulp_three::nginx_package_name: 'nginx'
 pulp_three::pulp_content_bind_address: '127.0.0.1'
 pulp_three::pulp_content_bind_port: 24816
 pulp_three::pulp_api_bind_address: '127.0.0.1'
-pulp_three::pulp_api_bind_port: 24816
+pulp_three::pulp_api_bind_port: 24817
 pulp_three::pulp_settings_file: '/etc/pulp/settings.py'
 pulp_three::pulp_admin_password: 'admin'
 pulp_three::pulp_worker_ids: ['1', '2']
