@@ -83,6 +83,25 @@
 # @redis_password
 #   Redis password for Pulp workers.  Defaults to 'redis'.
 #
+# @manage_nginx
+#   Whether this module should install the nginx webserver and configure it as a reverse proxy to the pulp services.  Defaults to false.
+#
+# @nginx_package_name
+#   Which version of the nginx package to install.  Defaults to 'nginx'.
+#
+# @pulp_content_bind_address
+#   Address of pulp content service.  Defaults to '127.0.0.1'
+#
+#  @pulp_content_bind_port
+#    Port of pulp content service.  Defaults to 24816.
+#
+#  @pulp_api_bind_address
+#    Address of pulp api service.  Defaults to '127.0.0.1'
+#
+#  @pulp_api_bind_port
+#    Port of pulp api service.  Defaults to 24816.
+#
+class pulp_three (
   Boolean $install_prereqs,
   Boolean $manage_python,
   Boolean $manage_user,
@@ -109,6 +128,12 @@
   String $redis_host,
   Integer $redis_port,
   String $redis_password,
+  Boolean $manage_nginx,
+  String $nginx_package_name,
+  String $pulp_content_bind_address,
+  Integer $pulp_content_bind_port,
+  String $pulp_api_bind_address,
+  Integer $pulp_api_bind_port,
 ){
 
   if $install_prereqs {
@@ -177,6 +202,18 @@
     redis_host              => $redis_host,
     redis_port              => $redis_port,
     redis_password          => $redis_password,
+  }
+
+  if $manage_nginx {
+    class { 'pulp_three::nginx':
+      nginx_package_name        => $nginx_package_name,
+      pulp_install_dir          => $pulp_install_dir,
+      pulp_content_bind_address => $pulp_content_bind_address,
+      pulp_content_bind_port    => $pulp_content_bind_port,
+      pulp_api_bind_address     => $pulp_api_bind_address,
+      pulp_api_bind_port        => $pulp_api_bind_port,
+    }
+    contain 'pulp_three::nginx'
   }
 
 }
