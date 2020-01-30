@@ -74,7 +74,6 @@ class pulp_three::nginx (
     ],
     proxy_redirect      => 'off',
     proxy               => 'http://pulp',
-    proxy_next_upstream => 'http_404',
     server              => $::fqdn,
   }
 
