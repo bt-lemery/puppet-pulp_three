@@ -1,0 +1,33 @@
+<%- |
+  $pulp_settings_file,
+  $pulp_install_dir,
+  $pulp_user,
+  $pulp_content_bind_address,
+  $pulp_content_bind_port,
+| -%>
+[Unit]
+Description=Pulp Content App
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Environment="DJANGO_SETTINGS_MODULE=pulpcore.app.settings"
+Environment="PULP_SETTINGS=<%= $pulp_settings_file %>"
+Environment="PATH=<%= $pulp_install_dir %>/bin:$PATH"
+User=<%= $pulp_user %>
+WorkingDirectory=/var/run/pulpcore-content/
+RuntimeDirectory=pulpcore-content
+ExecStart=<%= $pulp_install_dir %>/bin/gunicorn pulpcore.content:server \
+          --bind '<%= $pulp_content_bind_address %>:<%= $pulp_content_bind_port %>' \
+          --worker-class 'aiohttp.GunicornWebWorker' \
+          -w 2 \
+          --access-logfile -
+
+
+# This provides reconnect support for PostgreSQL and Redis. Without reconnect support, if either
+# is not available at startup or becomes disconnected, this process will die and not respawn.
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

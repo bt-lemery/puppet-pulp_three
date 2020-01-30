@@ -107,6 +107,9 @@
 #  @pulp_admin_password
 #    Password for Django admin account.  Defaults to 'admin'.
 #
+#  @pulp_worker_ids
+#    Names for pulp worker processes.  By default this module will create two worker processes called 'pulpcore-worker@1' and 'pulpcore-worker@2'.
+#
 class pulp_three (
   Boolean $install_prereqs,
   Boolean $manage_python,
@@ -142,6 +145,7 @@ class pulp_three (
   Integer $pulp_api_bind_port,
   String $pulp_settings_file,
   String $pulp_admin_password,
+  Array[String] $pulp_worker_ids,
 ){
 
   if $install_prereqs {
@@ -231,5 +235,18 @@ class pulp_three (
     pulp_admin_password => $pulp_admin_password,
   }
   contain 'pulp_three::migrations'
+
+  class { 'pulp_three::service':
+    pulp_settings_file        => $pulp_settings_file,
+    pulp_install_dir          => $pulp_install_dir,
+    pulp_user                 => $pulp_user,
+    pulp_group                => $pulp_group,
+    pulp_content_bind_address => $pulp_content_bind_address,
+    pulp_content_bind_port    => $pulp_content_bind_port,
+    pulp_api_bind_address     => $pulp_api_bind_address,
+    pulp_api_bind_port        => $pulp_api_bind_port,
+    pulp_worker_ids           => $pulp_worker_ids,
+  }
+  contain 'pulp_three::service'
 
 }
