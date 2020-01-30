@@ -1,4 +1,5 @@
 class pulp_three::config (
+  $pulp_settings_file,
   $pulp_group,
   $secret_key,
   $content_origin_host,
@@ -21,7 +22,7 @@ class pulp_three::config (
     mode   => '0755',
   }
 
-  file { '/etc/pulp/settings.py':
+  file { $pulp_settings_file:
     ensure  => present,
     owner   => 'root',
     group   => $pulp_group,

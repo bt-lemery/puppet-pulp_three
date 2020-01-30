@@ -101,6 +101,9 @@
 #  @pulp_api_bind_port
 #    Port of pulp api service.  Defaults to 24816.
 #
+#  @pulp_settings_file
+#    File location for Pulp config.  Defaults to '/etc/pulp/settings.py'.
+#
 class pulp_three (
   Boolean $install_prereqs,
   Boolean $manage_python,
@@ -134,6 +137,7 @@ class pulp_three (
   Integer $pulp_content_bind_port,
   String $pulp_api_bind_address,
   Integer $pulp_api_bind_port,
+  String $pulp_settings_file,
 ){
 
   if $install_prereqs {
@@ -189,6 +193,7 @@ class pulp_three (
   }
 
   class { 'pulp_three::config':
+    pulp_settings_file      => $pulp_settings_file,
     pulp_group              => $pulp_group,
     secret_key              => $secret_key,
     content_origin_host     => $content_origin_host_final,
