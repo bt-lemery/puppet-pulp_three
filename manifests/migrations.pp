@@ -15,7 +15,7 @@ class pulp_three::migrations (
     user        => 'pulp',
     group       => 'pulp',
     logoutput   => true,
-    creates     => ""${pulp_install_dir}/initial_setup_complete",
+    creates     => "${pulp_install_dir}/initial_setup_complete",
     before      => File["${pulp_install_dir}/initial_setup_complete"],
   }
 
@@ -29,7 +29,7 @@ class pulp_three::migrations (
     user        => 'pulp',
     group       => 'pulp',
     logoutput   => true,
-    creates     => ""${pulp_install_dir}/initial_setup_complete",
+    creates     => "${pulp_install_dir}/initial_setup_complete",
     before      => File["${pulp_install_dir}/initial_setup_complete"],
   }
 
@@ -43,7 +43,7 @@ class pulp_three::migrations (
     user        => 'pulp',
     group       => 'pulp',
     logoutput   => true,
-    creates     => ""${pulp_install_dir}/initial_setup_complete",
+    creates     => "${pulp_install_dir}/initial_setup_complete",
     before      => File["${pulp_install_dir}/initial_setup_complete"],
   }
 
