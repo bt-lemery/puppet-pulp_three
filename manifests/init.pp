@@ -5,109 +5,109 @@
 # @example
 #   include pulp_three
 #
-# @install_prereqs
+# @param install_prereqs
 #   Specifies whether to allow this module to install any rpms required by your chosen pulp plugins.
 #
-# @pulp_plugins
+# @param pulp_plugins
 #   Array of pulp plugins to install in addition to 'pulpcore'.
 #
-# @manage_python
+# @param manage_python
 #   Specifies whether to allow this module to install a Python interpreter from SCL.
 #
-# @python_version
+# @param python_version
 #   Python version to install from SCL.  Defaults to 'rh-python36'.
 #
-# @proxy
+# @param proxy
 #   Proxy to use when installing pip packages/ruby gems.  Defaults to none.
 #
-# @manage_user
+# @param manage_user
 #   Whether this module should create a user to run pulp.  Defaults to false.
 #
-# @pulp_user
+# @param pulp_user
 #   Name of pulp user.  Defaults to 'pulp'.
 #
-# @pulp_user_uid
+# @param pulp_user_uid
 #   UID for pulp user. Defaults to 500.
 #
-# @pulp_user_homedir
+# @param pulp_user_homedir
 #   Pulp user homedir.  Defaults to pulp_media_root.
 #
-# @pulp_group
+# @param pulp_group
 #   Pulp group.  Defaults to 'pulp'.
 #
-# @pulp_group_gid
+# @param pulp_group_gid
 #   GID for pulp group.  Defaults to 500.
 #
-# @pulp_media_root
+# @param pulp_media_root
 #   Pulp media root.  Defaults to '/var/lib/pulp'.
 #
-# @pulp_working_dir
+# @param pulp_working_dir
 #   Pulp working directory.  Defaults to '/var/lib/pulp/tmp'.
 #
-# @pulp_install_dir
+# @param pulp_install_dir
 #   Where to install the pulp venv.  Defaults to '/var/lib/pulp/pulpvenv'.
 #
-# @secret_key
+# @param secret_key
 #   Secret key for Django.  Defaults to 'secret'.
 #
-# @content_origin_host
+# @param content_origin_host
 #   Content origin hostname for Django.  Defaults to FQDN.
 #
-# @content_origin_protocol
+# @param content_origin_protocol
 #   Content origin protocol for Django.  Defaults to 'http'.
 #
-# @content_origin_port
+# @param content_origin_port
 #   Content origin port for Django.  Defaults to 24816.
 #
-# @database_engine
+# @param database_engine
 #   Database engine string for Django.  Defaults to 'django.db.backends.postgresql_psycopg2'.
 #
-# @database_host
+# @param database_host
 #   Database host for Django.  Defaults to 'localhost'.
 #
-# @database_user
+# @param database_user
 #   Database user for Django.  Defaults to 'pulp'.
 #
-# @database_password
+# @param database_password
 #   Database password for Django.  Defaults to 'pulp'.
 #
-# @database_name
+# @param database_name
 #   Database name for Django.  Defaults to 'pulp'.
 #
-# @redis_host
+# @param redis_host
 #   Redis host for Pulp workers.  Defaults to 'localhost'.
 #
-# @redis_port
+# @param redis_port
 #   Redis port for Pulp workers.  Defaults to 6379.
 #
-# @redis_password
+# @param redis_password
 #   Redis password for Pulp workers.  Defaults to 'redis'.
 #
-# @manage_nginx
+# @param manage_nginx
 #   Whether this module should install the nginx webserver and configure it as a reverse proxy to the pulp services.  Defaults to false.
 #
-# @nginx_package_name
+# @param nginx_package_name
 #   Which version of the nginx package to install.  Defaults to 'nginx'.
 #
-# @pulp_content_bind_address
+# @param pulp_content_bind_address
 #   Address of pulp content service.  Defaults to '127.0.0.1'
 #
-#  @pulp_content_bind_port
+#  @param pulp_content_bind_port
 #    Port of pulp content service.  Defaults to 24816.
 #
-#  @pulp_api_bind_address
+#  @param pulp_api_bind_address
 #    Address of pulp api service.  Defaults to '127.0.0.1'
 #
-#  @pulp_api_bind_port
+#  @param pulp_api_bind_port
 #    Port of pulp api service.  Defaults to 24817.
 #
-#  @pulp_settings_file
+#  @param pulp_settings_file
 #    File location for Pulp config.  Defaults to '/etc/pulp/settings.py'.
 #
-#  @pulp_admin_password
+#  @param pulp_admin_password
 #    Password for Django admin account.  Defaults to 'admin'.
 #
-#  @pulp_worker_ids
+#  @param pulp_worker_ids
 #    Names for pulp worker processes.  By default this module will create two worker processes called 'pulpcore-worker@1' and 'pulpcore-worker@2'.
 #
 class pulp_three (
