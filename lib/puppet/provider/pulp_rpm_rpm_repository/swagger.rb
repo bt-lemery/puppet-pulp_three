@@ -69,4 +69,22 @@ Puppet::Type.type(:pulp_rpm_rpm_repository).provide(:swagger) do
     end
   end
 
+  def destroy
+    api_instance = do_login
+
+    pulp_href = get_href_by_name(resource[:name])
+
+    api_instance.delete(pulp_href)
+  end
+
+  def get_href_by_name(repository_name)
+    api_instance = do_login
+
+    opts = {
+      name: repository_name,
+    }
+
+    result = api_instance.list(opts).results[0].pulp_href
+  end
+
 end
