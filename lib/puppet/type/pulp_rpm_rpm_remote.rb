@@ -34,7 +34,7 @@ Puppet::Type.newtype(:pulp_rpm_rpm_remote) do
 
   newproperty(:download_concurrency) do
     desc "Total number of simultaneous connections."
-    defaultto '1'
+    defaultto '20'
   end
 
   newproperty(:policy) do
