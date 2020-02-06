@@ -60,12 +60,29 @@ Puppet::Type.type(:pulp_rpm_rpm_repository).provide(:swagger) do
       name: resource[:name],
     }
 
-    result = api_instance.list(opts).results[0].name
+    results = api_instance.list(opts).results
 
-    if result.empty?
+    if results.empty?
       false
     else
-      true
+      result = api_instance.list(opts).results[0].name
+      if result.empty?
+        false
+      else
+        true
+      end
+    end
+  end
+
+  def create
+    api_instance = do_login
+
+    nr = PulpRpmClient::RpmRpmRepository.new(name: resource[:name], description: resource[:description])
+
+    begin
+      result = api_instance.create(nr)
+    rescue PulpRpmClient::ApiError => e
+      puts "Exception when calling RepositoriesRpmApi->create: #{e}"
     end
   end
 
@@ -74,7 +91,11 @@ Puppet::Type.type(:pulp_rpm_rpm_repository).provide(:swagger) do
 
     pulp_href = get_href_by_name(resource[:name])
 
-    api_instance.delete(pulp_href)
+    begin
+      api_instance.delete(pulp_href)
+    rescue PulpRpmClient::ApiError => e
+      puts "Exception when calling RepositoriesRpmApi->delete: #{e}"
+    end
   end
 
   def get_href_by_name(repository_name)
