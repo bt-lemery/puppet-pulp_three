@@ -34,6 +34,7 @@ class pulp_three::packages (
       'zlib-devel',
       'cairo-gobject-devel',
       'gobject-introspection-devel',
+      'jq',
     ]
 
     package { $_pulp_rpm_packages:
