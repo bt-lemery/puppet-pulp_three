@@ -11,15 +11,15 @@ Puppet::Type.newtype(:pulp_rpm_rpm_remote) do
   end
 
   newproperty(:ca_cert) do
-    desc "A string containing the PEM encoded CA certificate used to validate the server certificate presented by the remote server."
+    desc "Path to the PEM encoded CA certificate used to validate the server certificate presented by the remote server."
   end
 
   newproperty(:client_cert) do
-    desc "A string containing the PEM encoded client certificate used for authentication."
+    desc "Path to a file containing the PEM encoded client certificate used for authentication."
   end
 
   newproperty(:client_key) do
-    desc "A PEM encoded private key used for authentication."
+    desc "Path to a file containing a PEM encoded private key used for authentication."
   end
 
   newproperty(:tls_validation) do
@@ -34,12 +34,11 @@ Puppet::Type.newtype(:pulp_rpm_rpm_remote) do
 
   newproperty(:download_concurrency) do
     desc "Total number of simultaneous connections."
-    defaultto '20'
+    defaultto 20
   end
 
   newproperty(:policy) do
     desc "The policy to use when downloading content."
-    defaultto 'immediate'
-    newvalues('immediate', 'on_demand', 'streamed')
+    defaultto "immediate"
   end
 end
