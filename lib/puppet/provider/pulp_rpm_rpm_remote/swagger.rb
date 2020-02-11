@@ -13,9 +13,6 @@ Puppet::Type.type(:pulp_rpm_rpm_remote).provide(:swagger) do
         name: remote.name,
         url: remote.url,
         policy: remote.policy,
-        ca_cert: remote.ca_cert,
-        client_cert: remote.client_cert,
-        client_key: remote.client_key,
         tls_validation: remote.tls_validation,
         proxy_url: remote.proxy_url,
         download_concurrency: remote.download_concurrency,
@@ -91,7 +88,7 @@ Puppet::Type.type(:pulp_rpm_rpm_remote).provide(:swagger) do
     end
 
     if resource[:tls_validation]
-      nr.tls_validation = resource[:tls_validation]
+      nr.tls_validation = cast_to_bool(resource[:tls_validation].to_s)
       ca_cert_to_string = File.read(resource[:ca_cert])
       nr.ca_cert = ca_cert_to_string
     end
@@ -117,6 +114,11 @@ Puppet::Type.type(:pulp_rpm_rpm_remote).provide(:swagger) do
   end
 
   def destroy
+  end
+
+  def cast_to_bool(foo)
+    return true if foo == 'true'
+    return false if foo == 'false'
   end
 
 end

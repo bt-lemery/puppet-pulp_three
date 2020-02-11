@@ -10,15 +10,15 @@ Puppet::Type.newtype(:pulp_rpm_rpm_remote) do
     desc "The URL of an external content source."
   end
 
-  newproperty(:ca_cert) do
+  newparam(:ca_cert) do
     desc "Path to the PEM encoded CA certificate used to validate the server certificate presented by the remote server."
   end
 
-  newproperty(:client_cert) do
+  newparam(:client_cert) do
     desc "Path to a file containing the PEM encoded client certificate used for authentication."
   end
 
-  newproperty(:client_key) do
+  newparam(:client_key) do
     desc "Path to a file containing a PEM encoded private key used for authentication."
   end
 
@@ -40,5 +40,6 @@ Puppet::Type.newtype(:pulp_rpm_rpm_remote) do
   newproperty(:policy) do
     desc "The policy to use when downloading content."
     defaultto "immediate"
+    # newvalues('immediate', 'on_demand', 'streamed')
   end
 end
