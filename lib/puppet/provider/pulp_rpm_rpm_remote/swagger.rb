@@ -114,6 +114,25 @@ Puppet::Type.type(:pulp_rpm_rpm_remote).provide(:swagger) do
   end
 
   def destroy
+    api_instance = do_login
+
+    remote_href = get_href_by_name(resource[:name])
+
+    begin
+      api_instance.delete(remote_href)
+    rescue PulpRpmClient::ApiError => e
+      puts "Exception when calling RemotesRpmApi->delete: #{e}"
+    end
+  end
+
+  def get_href_by_name(remote_name)
+    api_instance = do_login
+
+    opts = {
+      name: remote_name,
+    }
+
+    result = api_instance.list(opts).results[0].pulp_href
   end
 
   def cast_to_bool(foo)
