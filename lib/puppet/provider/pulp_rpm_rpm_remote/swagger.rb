@@ -13,7 +13,7 @@ Puppet::Type.type(:pulp_rpm_rpm_remote).provide(:swagger) do
         name: remote.name,
         url: remote.url,
         policy: remote.policy,
-        tls_validation: remote.tls_validation,
+        tls_validation: remote.tls_validation.to_s,
         proxy_url: remote.proxy_url,
         download_concurrency: remote.download_concurrency,
         provider: :swagger,
@@ -116,12 +116,94 @@ Puppet::Type.type(:pulp_rpm_rpm_remote).provide(:swagger) do
   def destroy
     api_instance = do_login
 
-    remote_href = get_href_by_name(resource[:name])
+    rpm_remote_href = get_href_by_name(resource[:name])
 
     begin
-      api_instance.delete(remote_href)
+      api_instance.delete(rpm_remote_href)
     rescue PulpRpmClient::ApiError => e
       puts "Exception when calling RemotesRpmApi->delete: #{e}"
+    end
+  end
+
+  def url=(_value)
+    api_instance = do_login
+
+    rpm_remote_href = get_href_by_name(resource[:name])
+
+    data = PulpRpmClient::RpmRpmRemote.new(url: resource[:url])
+
+    begin
+      #Partially update a rpm remote
+      result = api_instance.partial_update(rpm_remote_href, data)
+      p result
+    rescue PulpRpmClient::ApiError => e
+      puts "Exception when calling RemotesRpmApi->partial_update: #{e}"
+    end
+  end
+
+  def proxy_url=(_value)
+    api_instance = do_login
+
+    rpm_remote_href = get_href_by_name(resource[:name])
+
+    data = PulpRpmClient::RpmRpmRemote.new(proxy_url: resource[:proxy_url])
+
+    begin
+      #Partially update a rpm remote
+      result = api_instance.partial_update(rpm_remote_href, data)
+      p result
+    rescue PulpRpmClient::ApiError => e
+      puts "Exception when calling RemotesRpmApi->partial_update: #{e}"
+    end
+  end
+
+  def download_concurrency=(_value)
+    api_instance = do_login
+
+    rpm_remote_href = get_href_by_name(resource[:name])
+
+    data = PulpRpmClient::RpmRpmRemote.new(download_concurrency: resource[:download_concurrency])
+
+    begin
+      #Partially update a rpm remote
+      result = api_instance.partial_update(rpm_remote_href, data)
+      p result
+    rescue PulpRpmClient::ApiError => e
+      puts "Exception when calling RemotesRpmApi->partial_update: #{e}"
+    end
+  end
+
+  def policy=(_value)
+    api_instance = do_login
+
+    rpm_remote_href = get_href_by_name(resource[:name])
+
+    data = PulpRpmClient::RpmRpmRemote.new(policy: resource[:policy])
+
+    begin
+      #Partially update a rpm remote
+      result = api_instance.partial_update(rpm_remote_href, data)
+      p result
+    rescue PulpRpmClient::ApiError => e
+      puts "Exception when calling RemotesRpmApi->partial_update: #{e}"
+    end
+  end
+
+  def tls_validation=(_value)
+    api_instance = do_login
+
+    rpm_remote_href = get_href_by_name(resource[:name])
+
+    tls_validation_bool = cast_to_bool(resource[:tls_validation].to_s)
+
+    data = PulpRpmClient::RpmRpmRemote.new(tls_validation: tls_validation_bool)
+
+    begin
+      #Partially update a rpm remote
+      result = api_instance.partial_update(rpm_remote_href, data)
+      p result
+    rescue PulpRpmClient::ApiError => e
+      puts "Exception when calling RemotesRpmApi->partial_update: #{e}"
     end
   end
 
